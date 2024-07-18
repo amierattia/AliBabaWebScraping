@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AmazonWebScraping.viewModels"
+             x:Class="AmazonWebScraping.MainPage">
+    <ContentPage.BindingContext>
+        <vm:ViewModelsView/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Button Text="العدد والادوات" Command="{Binding ViewDataCommand}" />
+            <Button Text="الهواتف الذكيه" x:Name="Acc" Clicked="Acc_Clicked"/>
+            <Button Text="الالعاب" x:Name="Game" Clicked="Game_Clicked"/>
+            <Button Text="الكاميرا والصور والملحقات" x:Name="Camera_photos_and_accessories" Clicked="Camera_photos_and_accessories_Clicked"/>
+            <Button Text="الساعات الذكيه" x:Name="smartWatch" Clicked="smartWatch_Clicked"/>
+            <Grid Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <CollectionView ItemsSource="{Binding DisplayData}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="20" BackgroundColor="#f3f6fb" HeightRequest="500" StrokeShape="RoundRectangle 10" Margin="0,0,0,10">
+                                <AbsoluteLayout Padding="10">
+                                    <Image AbsoluteLayout.LayoutBounds="1,.5" AbsoluteLayout.LayoutFlags="PositionProportional"  Source="{Binding Image}" Margin="0,0,30,0" BackgroundColor="Black"  HeightRequest="150" WidthRequest="150"/>
+                                    <Label Text="{Binding CatigoryName}" TextColor="Black" AbsoluteLayout.LayoutBounds="0,.5" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                                </AbsoluteLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" 
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

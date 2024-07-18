@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AmazonWebScraping.View.accessoriesView"
+             xmlns:view="clr-namespace:AmazonWebScraping.viewModels"
+             Title="accessoriesView">
+    <ContentPage.BindingContext>
+        <view:accessories/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Button Text="Load Data" Command="{Binding GetDataCommand}" />
+            <Grid Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <CollectionView ItemsSource="{Binding displayData}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="20" BackgroundColor="#f3f6fb" HeightRequest="500" StrokeShape="RoundRectangle 10" Margin="0,0,0,10">
+                                <AbsoluteLayout Padding="10">
+                                    <Image AbsoluteLayout.LayoutBounds="1,.5" AbsoluteLayout.LayoutFlags="PositionProportional"  Source="{Binding Image}" Margin="0,0,30,0" BackgroundColor="Black"  HeightRequest="150" WidthRequest="150"/>
+                                    <Label WidthRequest="500" Text="{Binding Name}" TextColor="Black" AbsoluteLayout.LayoutBounds="0,.5" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                                </AbsoluteLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" 
+         HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
